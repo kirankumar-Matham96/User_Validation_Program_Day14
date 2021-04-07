@@ -1,5 +1,7 @@
 package comUserValidation;
 
+import java.util.Locale;
+
 public class UserValidationProgram
 {
     //variables
@@ -12,11 +14,15 @@ public class UserValidationProgram
     int zip;
     long phoneNumber;
     
+    //Conyact class object
+    Contact contact;
+    
+    //scanner input
+    InputFromUser input = new InputFromUser();
+    
     //method to take inputs from user
     public void takesInput()
     {
-        InputFromUser input = new InputFromUser();
-        
         System.out.println("Enter first name");
         firstName = input.stringInput();
         
@@ -51,7 +57,7 @@ public class UserValidationProgram
         userValidationProgram.takesInput();
         
         //calling Contact class
-        Contact contact = new Contact(userValidationProgram.firstName,
+        userValidationProgram.contact = new Contact(userValidationProgram.firstName,
                                         userValidationProgram.lastName,
                                         userValidationProgram.address,
                                         userValidationProgram.city,
@@ -59,7 +65,15 @@ public class UserValidationProgram
                                         userValidationProgram.email,
                                         userValidationProgram.zip,
                                         userValidationProgram.phoneNumber);
-        System.out.println(contact);
+        System.out.println(userValidationProgram.contact);
+    
+        System.out.println("Do you want to edit details? y/n");
+        String option = userValidationProgram.input.stringInput();
+        if(option.equals("y"))
+        {
+            EditContactDetails editContactDetails = new EditContactDetails(userValidationProgram.contact);
+        }
+        System.out.println(userValidationProgram.contact);
         
     }
 }
